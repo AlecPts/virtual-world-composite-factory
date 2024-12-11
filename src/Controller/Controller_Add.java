@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Circle;
+import Model.Shape;
 import Model.ShapeManager;
 import java.awt.Color;
 import java.awt.Point;

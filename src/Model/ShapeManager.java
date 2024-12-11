@@ -18,20 +18,19 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class ShapeManager extends Observable {
 
-    ArrayList<Circle> shapes;
+    ArrayList<Shape> shapes;
     
-    public ShapeManager()
-    {
+    public ShapeManager() {
         shapes = new ArrayList<>();
     }
     
-    public void init()
-    {
+    public void init() {
+        DefaultMutableTreeNode shapeGroup = new DefaultMutableTreeNode("Shape Group");
     }
     
-    public void add(Circle circle)
+    public void add(Shape shape)
     {
-        shapes.add(circle);
+        shapes.add(shape);
 
         setChanged();
         notifyObservers();
@@ -43,16 +42,17 @@ public class ShapeManager extends Observable {
     }
 
     public void draw(Graphics graphics) {
-        for (Circle circle : shapes)
-            circle.draw(graphics);
+        for (Shape shape : shapes)
+            shape.draw(graphics);
     }
     
     public DefaultTreeModel getTreeModel() {
         
         DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode("Circles");
-        
-        for (Circle circle : shapes)
-            treeNode.add(circle.getJTreeNodes());
+
+
+        for (Shape shape : shapes)
+            treeNode.add(shape.getJTreeNodes());
         
         return new DefaultTreeModel(treeNode);
     }

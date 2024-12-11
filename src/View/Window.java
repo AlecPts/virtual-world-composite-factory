@@ -8,12 +8,14 @@ package View;
 import Controller.Controller_Add;
 import Model.ShapeManager;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JColorChooser;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -38,6 +40,8 @@ public class Window extends javax.swing.JFrame implements Observer {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 1));
         jPanel1.add(painter);
+
+        data.init();
         
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Empty");
         jTree_Objects.setModel(new DefaultTreeModel( root));
@@ -111,6 +115,12 @@ public class Window extends javax.swing.JFrame implements Observer {
         jButton_Remove.setText("Remove");
 
         jButton_Group.setText("Group");
+
+        jButton_Group.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         jScrollPane1.setViewportView(jTree_Objects);
 
@@ -290,13 +300,28 @@ public class Window extends javax.swing.JFrame implements Observer {
     private void jButton_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddActionPerformed
         
         Controller_Add ca = new Controller_Add(data);
-        
-        if (jRadioCircle.isSelected())
-        {
+
+        // Circle control
+        if (jRadioCircle.isSelected()) {
             ca.control("Circle", jButtonColor.getBackground());
             
             jTextPaneInformations.setText("Circle added");
         }
+
+        // Square control
+        if (jRadioSquare.isSelected()) {
+            ca.control("Square", jButtonColor.getBackground());
+
+            jTextPaneInformations.setText("Square added");
+        }
+
+        // Square control
+        if (jRadioRectangle.isSelected()) {
+            ca.control("Rectangle", jButtonColor.getBackground());
+
+            jTextPaneInformations.setText("Rectangle added");
+        }
+
     }//GEN-LAST:event_jButton_AddActionPerformed
 
     private void jButtonColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonColorActionPerformed
@@ -313,10 +338,10 @@ public class Window extends javax.swing.JFrame implements Observer {
         painter.repaint();
         
         // Reload JTree
-        //TreePath[] selectionPaths = jTree_Objects.getSelectionPaths(); // need to reload and not to use setModel...
-        jTree_Objects.setModel( data.getTreeModel());
+        TreePath[] selectionPaths = jTree_Objects.getSelectionPaths(); // need to reload and not to use setModel...
+        jTree_Objects.setModel(data.getTreeModel());
         expandAllNodes(jTree_Objects);
-        //jTree_Objects.setSelectionPaths(selectionPaths);
+        jTree_Objects.setSelectionPaths(selectionPaths);
         
         // Properties
         jSpinnerPositionX.setEnabled(false);

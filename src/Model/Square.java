@@ -3,15 +3,15 @@ package Model;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 
-public class Circle extends Shape {
+public class Square extends Shape {
     // Attribute
     private Point center;
     private double radius;
     Color color;
 
-    public Circle(Point center, Color color) {
+    public Square(Point center, double radius, Color color) {
         this.center = center;
-        this.radius = 100;
+        this.radius = radius;
         this.color = color;
     }
 
@@ -22,7 +22,7 @@ public class Circle extends Shape {
 
     @Override
     public String getType() {
-        return "Rectangle";
+        return "Square";
     }
 
     @Override
