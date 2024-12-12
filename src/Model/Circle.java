@@ -9,9 +9,9 @@ public class Circle extends Shape {
     private double radius;
     Color color;
 
-    public Circle(Point center, Color color) {
+    public Circle(Point center, double radius, Color color) {
         this.center = center;
-        this.radius = 100;
+        this.radius = radius;
         this.color = color;
     }
 
@@ -22,7 +22,7 @@ public class Circle extends Shape {
 
     @Override
     public String getType() {
-        return "Rectangle";
+        return "Circle";
     }
 
     @Override

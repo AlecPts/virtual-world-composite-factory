@@ -4,9 +4,8 @@
  */
 package Controller;
 
-import Model.Circle;
-import Model.Shape;
-import Model.ShapeManager;
+import Model.*;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
@@ -23,11 +22,12 @@ public class Controller_Add {
         data = d;
     }
     
-    public void control(String name, Color color)
+    public void control(String name, double width, double height, double radius, Color color)
     {
         Random rand= new Random(System.currentTimeMillis());
-        Circle circle = new Circle(new Point(rand.nextInt(200), rand.nextInt(200)), color);
-        
-        data.add(circle);
+        //Circle circle = new Circle(new Point(rand.nextInt(200), rand.nextInt(200)), color);
+
+        ShapeFactory shapeFactory = new ShapeFactory();
+        data.add(shapeFactory.getShape(name, rand, width, height, radius, color));
     }
 }

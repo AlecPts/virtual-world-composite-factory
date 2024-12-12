@@ -6,18 +6,18 @@ import java.awt.*;
 public class Square extends Shape {
     // Attribute
     private Point center;
-    private double radius;
+    private double size;
     Color color;
 
-    public Square(Point center, double radius, Color color) {
+    public Square(Point center, double size, Color color) {
         this.center = center;
-        this.radius = radius;
+        this.size = size;
         this.color = color;
     }
 
     @Override
     public java.awt.Rectangle getBox() {
-        return new java.awt.Rectangle((int)(center.x), (int)(center.y ), (int)(radius), (int)( radius));
+        return new java.awt.Rectangle((int)(center.x), (int)(center.y), (int)(size), (int)(size));
     }
 
     @Override
@@ -37,13 +37,13 @@ public class Square extends Shape {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillOval(center.x,center.y,(int)radius,(int)radius);
+        g.fillRect(center.x,center.y,(int)size,(int)size);
         g.setColor(Color.black);
-        g.drawOval(center.x,center.y,(int)radius,(int)radius);
+        g.drawRect(center.x,center.y,(int)size,(int)size);
     }
 
     @Override
     public DefaultMutableTreeNode getJTreeNodes() {
-        return new DefaultMutableTreeNode(getType()+ "(Center["+center.x+", "+center.y +"], R["+radius+"]");
+        return new DefaultMutableTreeNode(getType()+ "(Center["+center.x+", "+center.y +"], W["+size+"], H["+size+"]");
     }
 }

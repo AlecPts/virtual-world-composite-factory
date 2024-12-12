@@ -48,7 +48,7 @@ public class ShapeManager extends Observable {
     
     public DefaultTreeModel getTreeModel() {
         
-        DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode("Circles");
+        DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode("Shape Group");
 
 
         for (Shape shape : shapes)

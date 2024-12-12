@@ -6,6 +6,7 @@ package View;
 
 
 import Controller.Controller_Add;
+import Controller.Controller_GroupAdd;
 import Model.ShapeManager;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -44,7 +45,7 @@ public class Window extends javax.swing.JFrame implements Observer {
         data.init();
         
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Empty");
-        jTree_Objects.setModel(new DefaultTreeModel( root));
+        jTree_Objects.setModel(new DefaultTreeModel(root));
 
         pack();
     }
@@ -115,10 +116,10 @@ public class Window extends javax.swing.JFrame implements Observer {
         jButton_Remove.setText("Remove");
 
         jButton_Group.setText("Group");
-
         jButton_Group.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                Controller_GroupAdd groupAdd = new Controller_GroupAdd(jTree_Objects.getSelectionPaths());
+                groupAdd.control();
             }
         });
 
@@ -155,7 +156,7 @@ public class Window extends javax.swing.JFrame implements Observer {
             }
         });
 
-        jTextPaneInformations.setEnabled(false);
+        jTextPaneInformations.setEnabled(true);
         jScrollPane2.setViewportView(jTextPaneInformations);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -232,13 +233,40 @@ public class Window extends javax.swing.JFrame implements Observer {
 
         buttonGroup1.add(jRadioCircle);
         jRadioCircle.setText("Circle");
+        jRadioCircle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jRadioCircle.isSelected()) {
+                    jSpinnerPositionX.setEnabled(false);
+                    jSpinnerPositionY.setEnabled(false);
+                    jSpinnerRadius.setEnabled(true);
+                }
+            }
+        });
 
         buttonGroup1.add(jRadioSquare);
         jRadioSquare.setText("Square");
         jRadioSquare.setToolTipText("");
+        jRadioSquare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jRadioSquare.isSelected()) {
+                    jSpinnerRadius.setEnabled(false);
+                    jSpinnerPositionX.setEnabled(true);
+                    jSpinnerPositionY.setEnabled(true);
+                }
+            }
+        });
 
         buttonGroup1.add(jRadioRectangle);
         jRadioRectangle.setText("Rectangle");
+        jRadioRectangle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (jRadioRectangle.isSelected()) {
+                    jSpinnerRadius.setEnabled(false);
+                    jSpinnerPositionX.setEnabled(true);
+                    jSpinnerPositionY.setEnabled(true);
+                }
+            }
+        });
 
         jButton_Add.setText("Add");
         jButton_Add.addActionListener(new java.awt.event.ActionListener() {
@@ -303,21 +331,21 @@ public class Window extends javax.swing.JFrame implements Observer {
 
         // Circle control
         if (jRadioCircle.isSelected()) {
-            ca.control("Circle", jButtonColor.getBackground());
+            ca.control("Circle", 0.0, 0.0, (int)jSpinnerRadius.getValue(), jButtonColor.getBackground());
             
             jTextPaneInformations.setText("Circle added");
         }
 
         // Square control
         if (jRadioSquare.isSelected()) {
-            ca.control("Square", jButtonColor.getBackground());
+            ca.control("Square", (int)jSpinnerPositionX.getValue(), (int)jSpinnerPositionY.getValue(), 0.0, jButtonColor.getBackground());
 
             jTextPaneInformations.setText("Square added");
         }
 
         // Square control
         if (jRadioRectangle.isSelected()) {
-            ca.control("Rectangle", jButtonColor.getBackground());
+            ca.control("Rectangle", (int)jSpinnerPositionX.getValue(), (int)jSpinnerPositionY.getValue(), 0.0, jButtonColor.getBackground());
 
             jTextPaneInformations.setText("Rectangle added");
         }
@@ -332,6 +360,7 @@ public class Window extends javax.swing.JFrame implements Observer {
 
     }//GEN-LAST:event_jButtonColorActionPerformed
 
+
     @Override
     public void update(Observable o, Object arg) {
         painter.revalidate();
@@ -344,9 +373,9 @@ public class Window extends javax.swing.JFrame implements Observer {
         jTree_Objects.setSelectionPaths(selectionPaths);
         
         // Properties
-        jSpinnerPositionX.setEnabled(false);
-        jSpinnerPositionY.setEnabled(false);
-        jSpinnerRadius.setEnabled(false);
+        //jSpinnerPositionX.setEnabled(false);
+        //jSpinnerPositionY.setEnabled(false);
+        //jSpinnerRadius.setEnabled(false);
 
     }
     
